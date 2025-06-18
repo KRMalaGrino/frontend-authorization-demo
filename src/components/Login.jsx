@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
 import Logo from "./Logo";
 import "./styles/Login.css";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -17,6 +18,11 @@ const Login = () => {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(data);
+  };
+
   return (
     <div className="login">
       <Logo title={"CryptoDucks"} />
@@ -24,7 +30,7 @@ const Login = () => {
         This app contains highly sensitive information. Please sign in or
         register to access CryptoDucks.
       </p>
-      <form className="login__form">
+      <form className="login__form" onSubmit={handleSubmit}>
         <label htmlFor="username">Login:</label>
         <input
           id="username"
